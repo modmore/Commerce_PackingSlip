@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Packing slip for order {{ order.id }}</title>
+    <style type="text/css">
+        @page {
+            size: A4;
+            margin: 0;
+        }
+        html, body {
+            width: 210mm;
+            height: 297mm;
+            padding: 10mm;
+        }
+        * {
+            box-sizing: border-box;
+        }
+        table.full-width {
+            width: 100%;
+        }
+        .align-top {
+            vertical-align: top;
+        }
+        .align-right {
+            text-align: right;
+        }
+        thead, th, .summary {
+            font-weight: bold;
+            background-color: #ddd !important;
+        }
+
+        a {
+            color: #000 !important;
+            text-decoration: none;
+        }
+
+        .products {
+            border: 1px solid #ddd;
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .products td, .products th, .summary td {
+            padding: 0.5em;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        .products .detailrow table {
+            width: 90%;
+        }
+
+        .meta {
+            font-size: 1.15em;
+        }
+        .meta dt {
+            font-weight:  bold;
+        }
+        .meta dd {
+        }
+    </style>
+</head>
+<body onload="window.print();window.close();">
+
+<table class="full-width">
+    <tr>
+        <td class="align-top">
+            <h1>{{ site_name }}</h1>
+            <h2>Packing Slip</h2>
+        </td>
+        <td>
+            <dl class="meta align-right">
+                <dt>Order</dt>
+                <dd>#{{ order.id }}</dd>
+                <dt>Shipment</dt>
+                <dd>#{{ shipment.id }}</dd>
+                <dt>Delivery Type</dt>
+                <dd>{{ delivery_type.name }}</dd>
+                <dt>Shipping Method</dt>
+                <dd>{{ shipping_method.name }}</dd>
+            </dl>
+        </td>
+    </tr>
+</table>
+<table class="full-width">
+    <tr>
+        <td>
+            <h3>Shipping Address</h3>
+            {{ shipping|format_address }}
+        </td>
+        <td>
+            <h3>Billing Address</h3>
+            {{ shipping|format_address }}
+        </td>
+    </tr>
+</table>
+
+<h3>Products</h3>
+
+<table class="products">
+    <thead>
+    <tr>
+        <td>Quantity</td>
+        <td>Product</td>
+        <td>SKU</td>
+        <td>Barcode</td>
+    </tr>
+    </thead>
+    <tbody>
+    {% for item in items %}
+        <tr>
+            <td>{{ item.quantity }}</td>
+            <td>{{ item.name }}</td>
+            <td>{{ item.sku }}</td>
+            <td>{% if item.product %}{{ item.product.barcode }}{% endif %}</td>
+        </tr>
+        {% if item.extra|length > 0 %}
+            <tr class="detailrow">
+                <td></td>
+                <td colspan="3">
+                    {{ item.extra|raw }}
+                </td>
+            </tr>
+        {% endif %}
+    {% endfor %}
+    </tbody>
+</table>
+<table class="full-width summary">
+    <tbody>
+    <tr>
+        <td>Total Products: {{ shipment.product_quantity }}</td>
+        <td>Approx. weight: {{ weight }}</td>
+    </tr>
+    </tbody>
+</table>
+
+{#{{ dump() }}#}
+
+</body>
+</html>

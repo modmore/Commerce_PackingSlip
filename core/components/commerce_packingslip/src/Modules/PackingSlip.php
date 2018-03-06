@@ -1,8 +1,10 @@
 <?php
 namespace modmore\Commerce\PackingSlip\Modules;
 use modmore\Commerce\Admin\Util\Action;
+use modmore\Commerce\Events\Admin\GeneratorEvent;
 use modmore\Commerce\Events\Admin\ShipmentActions;
 use modmore\Commerce\Modules\BaseModule;
+use modmore\Commerce\PackingSlip\Admin\PrintSlip;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Twig\Loader\ChainLoader;
 use Twig\Loader\FilesystemLoader;
@@ -39,14 +41,24 @@ class PackingSlip extends BaseModule {
         $loader->addLoader(new FilesystemLoader($root . '/templates/'));
 
         $dispatcher->addListener(\Commerce::EVENT_DASHBOARD_ORDERSHIPMENT_ACTIONS, [$this, 'addShipmentAction']);
+        $dispatcher->addListener(\Commerce::EVENT_DASHBOARD_GET_PAGES, [$this, 'addPages']);
     }
 
     public function addShipmentAction(ShipmentActions $event)
     {
+        $shipment = $event->getOrderShipment();
         $event->addAction((new Action)
             ->setTitle('Print Packing Slip')
-            ->setUrl('/foo')
+            ->setUrl($this->adapter->makeAdminUrl('packingslip/print', ['shipment' => $shipment->get('id')]))
+            ->setModal(false)
+            ->setNewWindow(true)
         );
+    }
+
+    public function addPages(GeneratorEvent $event)
+    {
+        $generator = $event->getGenerator();
+        $generator->addPage('packingslip/print', PrintSlip::class);
     }
 
     public function getModuleConfiguration(\comModule $module)
