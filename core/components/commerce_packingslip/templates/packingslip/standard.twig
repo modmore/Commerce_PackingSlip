@@ -14,7 +14,7 @@
         html, body {
             width: 210mm;
             height: 297mm;
-            font-size: 14pt;
+            font-size: 13pt;
             font-family: Georgia, "Times New Roman", serif;
         }
         * {
@@ -33,7 +33,7 @@
         }
         thead, th, .summary {
             font-weight: bold;
-            background-color: #ddd !important;
+            background-color: #eee !important;
         }
 
         a {
@@ -42,15 +42,23 @@
         }
 
         .products {
-            border: 1px solid #ddd;
+            border: 1px solid #bbb;
             width: 100%;
             border-collapse: collapse;
         }
 
-        .products td, .products th, .summary td {
+        .products td, .products th {
+            padding: 0.75em;
+            text-align: left;
+            border-bottom: 1px solid #bbb;
+        }
+        .summary {
+            border: 1px solid #bbb;
+            border-top: none;
+        }
+        .summary td {
             padding: 0.5em;
             text-align: left;
-            border-bottom: 1px solid #eee;
         }
         .products .detailrow table {
             width: 90%;
@@ -65,9 +73,15 @@
         .meta dd {
             margin-bottom: 0.5em;
         }
+        .box {
+            display: block;
+            width: 1.5em;
+            height: 1.5em;
+            border: 1px solid #999;
+        }
     </style>
 </head>
-<body onload="window.print();window.close();">
+<body onload="if (window.opener) { window.print();window.close(); }">
 
 <table class="full-width">
     <tr>
@@ -102,8 +116,6 @@
     </tr>
 </table>
 
-<h3>{{ lex('commerce.products') }}</h3>
-
 <table class="products">
     <thead>
     <tr>
@@ -111,6 +123,7 @@
         <td>{{ lex('commerce.product') }}</td>
         <td>{{ lex('commerce.sku') }}</td>
         <td>{{ lex('commerce.barcode') }}</td>
+        <td>&nbsp;</td>
     </tr>
     </thead>
     <tbody>
@@ -120,11 +133,12 @@
             <td>{{ item.name }}</td>
             <td>{{ item.sku }}</td>
             <td>{% if item.product %}{{ item.product.barcode }}{% endif %}</td>
+            <td><div class="box"></div> </td>
         </tr>
         {% if item.extra|length > 0 %}
             <tr class="detailrow">
                 <td></td>
-                <td colspan="3">
+                <td colspan="4">
                     {{ item.extra|raw }}
                 </td>
             </tr>
