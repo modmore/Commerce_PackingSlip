@@ -1,7 +1,11 @@
 <?php
 namespace modmore\Commerce\PackingSlip\Modules;
+use modmore\Commerce\Admin\Util\Action;
+use modmore\Commerce\Events\Admin\ShipmentActions;
 use modmore\Commerce\Modules\BaseModule;
 use Symfony\Component\EventDispatcher\EventDispatcher;
+use Twig\Loader\ChainLoader;
+use Twig\Loader\FilesystemLoader;
 
 require_once dirname(dirname(__DIR__)) . '/vendor/autoload.php';
 
@@ -15,7 +19,7 @@ class PackingSlip extends BaseModule {
 
     public function getAuthor()
     {
-        return 'Your Name Here';
+        return 'modmore';
     }
 
     public function getDescription()
@@ -28,16 +32,21 @@ class PackingSlip extends BaseModule {
         // Load our lexicon
         $this->adapter->loadLexicon('commerce_packingslip:default');
 
-        // Add the xPDO package, so Commerce can detect the derivative classes
-//        $root = dirname(dirname(__DIR__));
-//        $path = $root . '/model/';
-//        $this->adapter->loadPackage('commerce_packingslip', $path);
-
         // Add template path to twig
-//        /** @var ChainLoader $loader */
-//        $root = dirname(dirname(__DIR__));
-//        $loader = $this->commerce->twig->getLoader();
-//        $loader->addLoader(new FilesystemLoader($root . '/templates/'));
+        /** @var ChainLoader $loader */
+        $root = dirname(dirname(__DIR__));
+        $loader = $this->commerce->twig->getLoader();
+        $loader->addLoader(new FilesystemLoader($root . '/templates/'));
+
+        $dispatcher->addListener(\Commerce::EVENT_DASHBOARD_ORDERSHIPMENT_ACTIONS, [$this, 'addShipmentAction']);
+    }
+
+    public function addShipmentAction(ShipmentActions $event)
+    {
+        $event->addAction((new Action)
+            ->setTitle('Print Packing Slip')
+            ->setUrl('/foo')
+        );
     }
 
     public function getModuleConfiguration(\comModule $module)
