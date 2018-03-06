@@ -5,19 +5,22 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Packing slip for order {{ order.id }}</title>
+    <title>{{ lex('commerce_packingslip.packing_slip_for', {order: order.id}) }}</title>
     <style type="text/css">
         @page {
             size: A4;
-            margin: 0;
+            padding: 20mm;
         }
         html, body {
             width: 210mm;
             height: 297mm;
-            padding: 10mm;
+            font-size: 14pt;
+            font-family: Georgia, "Times New Roman", serif;
         }
         * {
             box-sizing: border-box;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
         }
         table.full-width {
             width: 100%;
@@ -54,12 +57,13 @@
         }
 
         .meta {
-            font-size: 1.15em;
+            /*font-size: 1.15em;*/
         }
         .meta dt {
             font-weight:  bold;
         }
         .meta dd {
+            margin-bottom: 0.5em;
         }
     </style>
 </head>
@@ -69,17 +73,17 @@
     <tr>
         <td class="align-top">
             <h1>{{ site_name }}</h1>
-            <h2>Packing Slip</h2>
+            <h2>{{ lex('commerce_packingslip') }}</h2>
         </td>
         <td>
             <dl class="meta align-right">
-                <dt>Order</dt>
+                <dt>{{ lex('commerce.order') }}</dt>
                 <dd>#{{ order.id }}</dd>
-                <dt>Shipment</dt>
+                <dt>{{ lex('commerce.shipment') }}</dt>
                 <dd>#{{ shipment.id }}</dd>
-                <dt>Delivery Type</dt>
+                <dt>{{ lex('commerce.delivery_type') }}</dt>
                 <dd>{{ delivery_type.name }}</dd>
-                <dt>Shipping Method</dt>
+                <dt>{{ lex('commerce.shipping_method') }}</dt>
                 <dd>{{ shipping_method.name }}</dd>
             </dl>
         </td>
@@ -88,25 +92,25 @@
 <table class="full-width">
     <tr>
         <td>
-            <h3>Shipping Address</h3>
+            <h3>{{ lex('commerce.shipping_address') }}</h3>
             {{ shipping|format_address }}
         </td>
         <td>
-            <h3>Billing Address</h3>
+            <h3>{{ lex('commerce.billing_address') }}</h3>
             {{ shipping|format_address }}
         </td>
     </tr>
 </table>
 
-<h3>Products</h3>
+<h3>{{ lex('commerce.products') }}</h3>
 
 <table class="products">
     <thead>
     <tr>
-        <td>Quantity</td>
-        <td>Product</td>
-        <td>SKU</td>
-        <td>Barcode</td>
+        <td>{{ lex('commerce.quantity') }}</td>
+        <td>{{ lex('commerce.product') }}</td>
+        <td>{{ lex('commerce.sku') }}</td>
+        <td>{{ lex('commerce.barcode') }}</td>
     </tr>
     </thead>
     <tbody>
@@ -131,13 +135,13 @@
 <table class="full-width summary">
     <tbody>
     <tr>
-        <td>Total Products: {{ shipment.product_quantity }}</td>
-        <td>Approx. weight: {{ weight }}</td>
+        <td>{{ lex('commerce.total_quantity') }}: {{ shipment.product_quantity }}</td>
+        <td>{{ lex('commerce.weight') }}: {{ weight }}</td>
     </tr>
     </tbody>
 </table>
 
-{#{{ dump() }}#}
+{# Enable commerce.debug and uncomment this line to see all available placeholders/data {{ dump() }}#}
 
 </body>
 </html>
