@@ -6,11 +6,11 @@ Requires Commerce 0.11 or higher.
 
 ## Configuration & Usage
 
-_Docs to follow._
+[Documentation can be found on the modmore documentation site.](https://docs.modmore.com/en/Commerce/v1/Modules/Shipping/PackingSlip.html)
 
 ## Install as a package
 
-_Installable package will be available from modmore.com._
+Packing Slip for Commerce is available as a free package from the modmore.com package provider.
 
 ## Building from source
 
