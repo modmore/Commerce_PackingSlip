@@ -1,4 +1,4 @@
-++ Packing Slip for Commerce 0.1.0-pl
-++ Released on
+++ Packing Slip for Commerce 1.0.0-pl
+++ Released on 2018-04-06
 ++++++++++++++++++++++++++
 - First release
