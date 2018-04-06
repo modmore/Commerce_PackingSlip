@@ -1,6 +1,6 @@
 <?php
 
-$_lang['commerce_packingslip'] = 'Packing Slip';
-$_lang['commerce_packingslip.description'] = 'Adds an action to order shipments to create a packing slip.';
-$_lang['commerce_packingslip.print_slip'] = 'Print Packing Slip';
-$_lang['commerce_packingslip.packing_slip_for'] = 'Packing slip for Order [[+order]]';
+$_lang['commerce_packingslip'] = 'Lieferschein';
+$_lang['commerce_packingslip.description'] = 'Fügt eine Aktion für Versandbestellungen hinzu, um einen Lieferschein zu erstellen.';
+$_lang['commerce_packingslip.print_slip'] = 'Lieferschein drucken';
+$_lang['commerce_packingslip.packing_slip_for'] = 'Lieferschein für die Bestellung [[+order]]';
