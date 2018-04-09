@@ -41,7 +41,7 @@ class PackingSlip extends BaseModule {
         $loader->addLoader(new FilesystemLoader($root . '/templates/'));
 
         $dispatcher->addListener(\Commerce::EVENT_DASHBOARD_ORDERSHIPMENT_ACTIONS, [$this, 'addShipmentAction']);
-        $dispatcher->addListener(\Commerce::EVENT_DASHBOARD_GET_PAGES, [$this, 'addPages']);
+        $dispatcher->addListener(\Commerce::EVENT_DASHBOARD_INIT_GENERATOR, [$this, 'initGenerator']);
     }
 
     public function addShipmentAction(ShipmentActions $event)
@@ -55,20 +55,9 @@ class PackingSlip extends BaseModule {
         );
     }
 
-    public function addPages(GeneratorEvent $event)
+    public function initGenerator(GeneratorEvent $event)
     {
         $generator = $event->getGenerator();
         $generator->addPage('packingslip/print', PrintSlip::class);
-    }
-
-    public function getModuleConfiguration(\comModule $module)
-    {
-        $fields = [];
-
-//        $fields[] = new DescriptionField($this->commerce, [
-//            'description' => $this->adapter->lexicon('commerce_packingslip.module_description'),
-//        ]);
-
-        return $fields;
     }
 }
