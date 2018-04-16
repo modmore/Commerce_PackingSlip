@@ -4,6 +4,7 @@
 namespace modmore\Commerce\PackingSlip\Admin;
 
 use modmore\Commerce\Admin\Page;
+use modmore\Commerce\Events\Admin\OrderItemDetail;
 
 class PrintSlip extends Page {
     public $key = 'packingslip/print_slip';
@@ -43,11 +44,19 @@ class PrintSlip extends Page {
         $items = $shipment->getItems();
         foreach ($items as $item) {
             $ta = $item->toArray();
+            $ta['extra'] = '';
 
             if ($product = $item->getProduct()) {
                 $ta['product'] = $product->toArray();
-                $ta['extra'] = $product->getOrderDetailRow($item);
+                $ta['extra'] .= $product->getOrderDetailRow($item);
             }
+
+            /** @var OrderItemDetail $event */
+            $event = $this->commerce->dispatcher->dispatch(\Commerce::EVENT_DASHBOARD_ORDER_ITEM_DETAIL, new OrderItemDetail($item));
+            foreach ($event->getRows() as $row) {
+                $ta['extra'] .= $row;
+            }
+
             $preppedItems[] = $ta;
         }
 
