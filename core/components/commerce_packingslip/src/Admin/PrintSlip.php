@@ -60,6 +60,11 @@ class PrintSlip extends Page {
             $preppedItems[] = $ta;
         }
 
+        $preppedTransactions = [];
+        $transactions = $order->getTransactions();
+        foreach ((array) $transactions as $transaction) {
+            $preppedTransactions[] = $transaction->toArray();
+        }
 
         $phs = [
             'shipment' => $shipment->toArray(),
@@ -70,6 +75,7 @@ class PrintSlip extends Page {
             'shipping' => $order->getShippingAddress()->toArray(),
             'billing' => $order->getBillingAddress()->toArray(),
             'items' => $preppedItems,
+            'transactions' => $preppedTransactions,
 
             'site_name' => $this->commerce->getOption('site_name'),
         ];
