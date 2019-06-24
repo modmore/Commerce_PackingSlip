@@ -5,6 +5,7 @@ namespace modmore\Commerce\PackingSlip\Admin;
 
 use modmore\Commerce\Admin\Page;
 use modmore\Commerce\Events\Admin\OrderItemDetail;
+use modmore\Commerce\Exceptions\ViewException;
 
 class PrintSlip extends Page {
     public $key = 'packingslip/print_slip';
@@ -75,7 +76,11 @@ class PrintSlip extends Page {
         ];
 
 
-        echo $this->commerce->twig->render('packingslip/standard.twig', $phs);
+        try {
+            echo $this->commerce->view()->render('packingslip/standard.twig', $phs);
+        } catch (ViewException $e) {
+            echo $e->getMessage();
+        }
 
         @session_write_close();
         exit();
