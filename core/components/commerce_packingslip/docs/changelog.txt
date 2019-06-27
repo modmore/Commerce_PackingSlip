@@ -1,5 +1,5 @@
-++ Packing Slip for Commerce 1.1.0-pl
-++ Released on 2019-07-
+++ Packing Slip for Commerce 1.1.0-rc1
+++ Released on 2019-06-27
 ++++++++++++++++++++++++++
 - Upgrade from using $commerce->twig to $commerce->view() (requires Commerce 1.1)
 - Make sure the Commerce::EVENT_DASHBOARD_ORDER_ITEM_DETAIL event is fired so additional order item information is shown
