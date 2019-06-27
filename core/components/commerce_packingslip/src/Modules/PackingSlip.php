@@ -44,7 +44,7 @@ class PackingSlip extends BaseModule {
     {
         $shipment = $event->getOrderShipment();
         $event->addAction((new Action)
-            ->setTitle('Print Packing Slip')
+            ->setTitle($this->adapter->lexicon('commerce_packingslip.print_slip'))
             ->setUrl($this->adapter->makeAdminUrl('packingslip/print', ['shipment' => $shipment->get('id')]))
             ->setModal(false)
             ->setNewWindow(true)

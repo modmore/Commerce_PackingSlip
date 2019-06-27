@@ -6,6 +6,7 @@
 - Replace deprecated (and as of v1.1 removed) Commerce::EVENT_DASHBOARD_GET_PAGES event with Commerce::EVENT_DASHBOARD_INIT_GENERATOR
 - Make transactions available in the template [#2]
 - Fix shipping address being used in default template instead of billing address [#1]
+- Use lexicon for the "Print packing slip" action button
 
 ++ Packing Slip for Commerce 1.0.0-pl
 ++ Released on 2018-04-06
