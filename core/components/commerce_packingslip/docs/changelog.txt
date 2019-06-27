@@ -1,3 +1,12 @@
+++ Packing Slip for Commerce 1.1.0-pl
+++ Released on 2019-07-
+++++++++++++++++++++++++++
+- Upgrade from using $commerce->twig to $commerce->view() (requires Commerce 1.1)
+- Make sure the Commerce::EVENT_DASHBOARD_ORDER_ITEM_DETAIL event is fired so additional order item information is shown
+- Replace deprecated (and as of v1.1 removed) Commerce::EVENT_DASHBOARD_GET_PAGES event with Commerce::EVENT_DASHBOARD_INIT_GENERATOR
+- Make transactions available in the template [#2]
+- Fix shipping address being used in default template instead of billing address [#1]
+
 ++ Packing Slip for Commerce 1.0.0-pl
 ++ Released on 2018-04-06
 ++++++++++++++++++++++++++
