@@ -23,7 +23,7 @@ if (!defined('MOREPROVIDER_BUILD')) {
     /* define version */
     define('PKG_NAME', 'Commerce Packing Slip');
     define('PKG_NAMESPACE', 'commerce_packingslip');
-    define('PKG_VERSION', '1.0.0');
+    define('PKG_VERSION', '1.1.0');
     define('PKG_RELEASE', 'rc1');
 
     /* load modx */
@@ -66,6 +66,22 @@ $builder = new modPackageBuilder($modx);
 $builder->directory = $targetDirectory;
 $builder->createPackage(PKG_NAMESPACE,PKG_VERSION,PKG_RELEASE);
 
+$builder->package->put(
+    [
+        'source' => $sources['source_core'],
+        'target' => "return MODX_CORE_PATH . 'components/';",
+    ],
+    [
+        'vehicle_class' => 'xPDOFileVehicle',
+        'validate' => [
+            [
+                'type' => 'php',
+                'source' => $sources['validators'] . 'requirements.script.php'
+            ]
+        ]
+    ]
+);
+
 /** @var modNamespace $namespace */
 $namespace = $modx->newObject('modNamespace');
 $namespace->set('name', PKG_NAMESPACE);
@@ -84,17 +100,6 @@ $attributes = array (
 $vehicle = $builder->createVehicle($namespace, $attributes);
 $modx->log(modX::LOG_LEVEL_INFO,'Packaged in namespace.'); flush();
 
-// Add the validator to check server requirements
-$vehicle->validate('php', array('source' => $sources['validators'] . 'requirements.script.php'));
-
-//$vehicle->resolve('file',array(
-//    'source' => $sources['source_assets'],
-//    'target' => "return MODX_ASSETS_PATH . 'components/';",
-//));
-$vehicle->resolve('file',array(
-    'source' => $sources['source_core'],
-    'target' => "return MODX_CORE_PATH . 'components/';",
-));
 $vehicle->resolve('php',array(
     'source' => $sources['resolvers'] . 'loadmodules.resolver.php',
 ));
