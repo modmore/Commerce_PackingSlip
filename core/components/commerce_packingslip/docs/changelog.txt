@@ -1,3 +1,8 @@
+++ Packing Slip for Commerce 1.1.0-pl
+++ Released on 2019-06-28
+++++++++++++++++++++++++++
+- Revert upgrade from using $commerce->twig to $commerce->view() (Commerce 1.1) to allow immediate stable release and smoother upgrade path
+
 ++ Packing Slip for Commerce 1.1.0-rc1
 ++ Released on 2019-06-27
 ++++++++++++++++++++++++++

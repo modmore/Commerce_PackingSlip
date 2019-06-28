@@ -6,6 +6,8 @@ use modmore\Commerce\Events\Admin\ShipmentActions;
 use modmore\Commerce\Modules\BaseModule;
 use modmore\Commerce\PackingSlip\Admin\PrintSlip;
 use Symfony\Component\EventDispatcher\EventDispatcher;
+use Twig\Loader\ChainLoader;
+use Twig\Loader\FilesystemLoader;
 
 require_once dirname(dirname(__DIR__)) . '/vendor/autoload.php';
 
@@ -32,9 +34,11 @@ class PackingSlip extends BaseModule {
         // Load our lexicon
         $this->adapter->loadLexicon('commerce_packingslip:default');
 
-        // Add template path to the view
-        $root = dirname(__DIR__, 2);
-        $this->commerce->view()->addTemplatesPath($root . '/templates/');
+        // Add template path to twig
+        /** @var ChainLoader $loader */
+        $root = dirname(dirname(__DIR__));
+        $loader = $this->commerce->twig->getLoader();
+        $loader->addLoader(new FilesystemLoader($root . '/templates/'));
 
         $dispatcher->addListener(\Commerce::EVENT_DASHBOARD_ORDERSHIPMENT_ACTIONS, [$this, 'addShipmentAction']);
         $dispatcher->addListener(\Commerce::EVENT_DASHBOARD_INIT_GENERATOR, [$this, 'initGenerator']);
