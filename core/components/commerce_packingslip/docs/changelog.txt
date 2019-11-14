@@ -1,4 +1,12 @@
+Packing Slip for Commerce 1.1.1-pl
+----------------------------------
+Released on 2019-11-14
+
 - Fix browser window closing immediately when opened, before the print dialog opened
+
+If you have a custom packingslip/standard.twig template, you'll need to apply the same fix to your own template. In the body tag, change the onload listener to this:
+
+    onload="if (window.opener) { window.print(); setTimeout(window.close, 100); }"
 
 Packing Slip for Commerce 1.1.0-pl
 ----------------------------------

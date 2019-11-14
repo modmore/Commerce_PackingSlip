@@ -23,8 +23,8 @@ if (!defined('MOREPROVIDER_BUILD')) {
     /* define version */
     define('PKG_NAME', 'Commerce Packing Slip');
     define('PKG_NAMESPACE', 'commerce_packingslip');
-    define('PKG_VERSION', '1.1.0');
-    define('PKG_RELEASE', 'rc1');
+    define('PKG_VERSION', '1.1.1');
+    define('PKG_RELEASE', 'pl');
 
     /* load modx */
     require_once dirname(dirname(__FILE__)) . '/config.core.php';
