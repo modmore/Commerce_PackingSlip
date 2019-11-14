@@ -1,13 +1,15 @@
 - Fix browser window closing immediately when opened, before the print dialog opened
 
-++ Packing Slip for Commerce 1.1.0-pl
-++ Released on 2019-06-28
-++++++++++++++++++++++++++
+Packing Slip for Commerce 1.1.0-pl
+----------------------------------
+Released on 2019-06-28
+
 - Revert upgrade from using $commerce->twig to $commerce->view() (Commerce 1.1) to allow immediate stable release and smoother upgrade path
 
-++ Packing Slip for Commerce 1.1.0-rc1
-++ Released on 2019-06-27
-++++++++++++++++++++++++++
+Packing Slip for Commerce 1.1.0-rc1
+-----------------------------------
+Released on 2019-06-27
+
 - Upgrade from using $commerce->twig to $commerce->view() (requires Commerce 1.1)
 - Make sure the Commerce::EVENT_DASHBOARD_ORDER_ITEM_DETAIL event is fired so additional order item information is shown
 - Replace deprecated (and as of v1.1 removed) Commerce::EVENT_DASHBOARD_GET_PAGES event with Commerce::EVENT_DASHBOARD_INIT_GENERATOR
@@ -15,7 +17,8 @@
 - Fix shipping address being used in default template instead of billing address [#1]
 - Use lexicon for the "Print packing slip" action button
 
-++ Packing Slip for Commerce 1.0.0-pl
-++ Released on 2018-04-06
-++++++++++++++++++++++++++
+Packing Slip for Commerce 1.0.0-pl
+----------------------------------
+Released on 2018-04-06
+
 - First release
