@@ -1,3 +1,5 @@
+- Fix browser window closing immediately when opened, before the print dialog opened
+
 ++ Packing Slip for Commerce 1.1.0-pl
 ++ Released on 2019-06-28
 ++++++++++++++++++++++++++
