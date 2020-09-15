@@ -84,8 +84,6 @@ switch($options[xPDOTransport::PACKAGE_ACTION]) {
         if (!checkVersion('PHP', PHP_VERSION, [
             '2017-01-01 12:00:00' => '5.5',
             '2019-07-01 12:00:00' => '7.1',
-            '2020-03-01 12:00:00' => '7.2',
-            '2020-11-30 12:00:00' => '7.3',
         ], $modx)) {
             $success = false;
         }

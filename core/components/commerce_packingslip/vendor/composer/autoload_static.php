@@ -20,11 +20,17 @@ class ComposerStaticInit68d461cc7d00439acc2288dceb0a8f69
         ),
     );
 
+    public static $classMap = array (
+        'modmore\\Commerce\\PackingSlip\\Admin\\PrintSlip' => __DIR__ . '/../..' . '/src/Admin/PrintSlip.php',
+        'modmore\\Commerce\\PackingSlip\\Modules\\PackingSlip' => __DIR__ . '/../..' . '/src/Modules/PackingSlip.php',
+    );
+
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInit68d461cc7d00439acc2288dceb0a8f69::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit68d461cc7d00439acc2288dceb0a8f69::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit68d461cc7d00439acc2288dceb0a8f69::$classMap;
 
         }, null, ClassLoader::class);
     }
