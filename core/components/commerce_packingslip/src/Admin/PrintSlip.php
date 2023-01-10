@@ -81,7 +81,7 @@ class PrintSlip extends Page {
         ];
 
 
-        echo $this->commerce->twig->render('packingslip/standard.twig', $phs);
+        echo $this->commerce->view()->render('packingslip/standard.twig', $phs);
 
         @session_write_close();
         exit();

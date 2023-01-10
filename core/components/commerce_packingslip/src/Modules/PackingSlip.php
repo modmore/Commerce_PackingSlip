@@ -35,10 +35,8 @@ class PackingSlip extends BaseModule {
         $this->adapter->loadLexicon('commerce_packingslip:default');
 
         // Add template path to twig
-        /** @var ChainLoader $loader */
-        $root = dirname(dirname(__DIR__));
-        $loader = $this->commerce->twig->getLoader();
-        $loader->addLoader(new FilesystemLoader($root . '/templates/'));
+        $root = dirname(__DIR__, 2);
+        $this->commerce->view()->addTemplatesPath($root . '/templates/');
 
         $dispatcher->addListener(\Commerce::EVENT_DASHBOARD_ORDERSHIPMENT_ACTIONS, [$this, 'addShipmentAction']);
         $dispatcher->addListener(\Commerce::EVENT_DASHBOARD_INIT_GENERATOR, [$this, 'initGenerator']);
