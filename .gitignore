@@ -3,3 +3,4 @@ config.core.php
 .DS_store
 _packages/
 vendor/
+core/components/commerce_packingslip/vendor/
