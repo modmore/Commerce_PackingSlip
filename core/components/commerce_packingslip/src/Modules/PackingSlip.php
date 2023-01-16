@@ -5,9 +5,7 @@ use modmore\Commerce\Events\Admin\GeneratorEvent;
 use modmore\Commerce\Events\Admin\ShipmentActions;
 use modmore\Commerce\Modules\BaseModule;
 use modmore\Commerce\PackingSlip\Admin\PrintSlip;
-use Symfony\Component\EventDispatcher\EventDispatcher;
-use Twig\Loader\ChainLoader;
-use Twig\Loader\FilesystemLoader;
+use modmore\Commerce\Dispatcher\EventDispatcher;
 
 require_once dirname(dirname(__DIR__)) . '/vendor/autoload.php';
 
